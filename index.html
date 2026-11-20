@@ -239,6 +239,60 @@ mark { background: var(--mark); color: inherit; box-shadow: inset 0 -1px 0 var(-
 .live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
 .live.wait::before { background: var(--ochre); }
 
+
+/* drawer: one decision beside the results, as the Case Note in HUDOC Researcher - a third column on wide screens,
+   a panel over the results on medium ones, a sheet above the status bar on a phone */
+:root { --drawer: 420px; --top-h: 64px; }
+.drawer { display: none; }
+body.dr-open.in-search .drawer { display: block; }
+.drawer { position: relative; background: var(--paper-2); overflow: hidden; }
+.dr-scroll { height: 100%; overflow-y: auto; overscroll-behavior: contain; padding: 0 22px 40px; }
+.dr-grip { position: absolute; left: -3px; top: 0; bottom: 0; width: 8px; cursor: col-resize; z-index: 3; touch-action: none; }
+.dr-grip:hover, body.dr-resizing .dr-grip { background: var(--accent-edge); }
+body.dr-resizing { user-select: none; cursor: col-resize; }
+.dr-z { font-size: calc(16px * var(--dz, 1)); }
+.dr-top { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 10px; padding: 14px 0 10px; background: var(--paper-2); border-bottom: 1px solid var(--rule); }
+.dr-tools { margin-left: auto; display: flex; gap: 4px; flex: none; }
+.dr-mini { display: none; min-width: 0; font: italic 500 14px/1.3 var(--f-display); text-transform: uppercase; letter-spacing: .02em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dr-btn { font: 500 12px var(--f-mono); background: var(--card); border: 1px solid var(--rule); color: var(--ink-2); min-width: 30px; height: 28px; cursor: pointer; }
+.dr-btn:hover { border-color: var(--accent-edge); color: var(--accent); }
+.dr-title { font: italic 500 1.12em/1.3 var(--f-display); text-transform: uppercase; letter-spacing: .02em; margin: 14px 0 4px; text-wrap: balance; }
+.dr-sub { font: 400 .72em/1.5 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 8px; }
+.dr-z .find { font-size: .9em; }
+.dr-z .pills { margin: 0 0 8px; } .dr-z .pill { font-size: .75em; }
+.dr-links { margin: 10px 0 14px; }
+.dr-ctx { border-top: 3px double var(--rule); padding-top: 8px; }
+.dr-why { margin: 6px 0 2px; }
+.dr-h { font: italic 400 .86em var(--f-body); color: var(--ochre); margin: 12px 0 2px 3.4em; }
+.dr-p { display: grid; grid-template-columns: 2.9em minmax(0, 1fr); gap: 0 .5em; padding: 10px 6px; border-top: 1px solid var(--rule-soft); }
+.dr-p.on { background: var(--accent-soft); box-shadow: inset 3px 0 0 var(--accent); }
+.dr-n { text-align: right; font: 500 .8em var(--f-mono); color: var(--accent); padding-top: .25em; white-space: nowrap; }
+.dr-p p { margin: 0; font-size: 1em; line-height: 1.6; overflow-wrap: anywhere; }
+.dr-acts { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; visibility: hidden; }
+.dr-p.on .dr-acts, .dr-p:hover .dr-acts, .dr-p:focus-within .dr-acts { visibility: visible; }
+@media (hover: none) { .dr-acts { visibility: visible; } .dr-p:not(.on) .dr-acts { display: none; } }
+.dr-more { display: block; width: 100%; margin: 6px 0; padding: 7px; font: 500 11px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; background: transparent; border: 1px dashed var(--rule); color: var(--accent); cursor: pointer; }
+.dr-more:hover { border-color: var(--accent-edge); background: var(--card); }
+.hit, .case { cursor: pointer; }
+.hit.active, .case.active { background: linear-gradient(90deg, var(--accent-soft), transparent 70%); box-shadow: inset 3px 0 0 var(--accent); }
+@media (min-width: 1181px) {
+  body.dr-open.in-search .frame { grid-template-columns: var(--rail) minmax(0, 1fr) var(--drawer); }
+  .drawer { position: sticky; top: calc(var(--top-h) + env(safe-area-inset-top, 0px)); align-self: start; border-left: 1px solid var(--rule);
+    height: calc(100vh - var(--top-h) - var(--bar) - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); }
+  .dr-scroll { padding-right: max(22px, env(safe-area-inset-right, 0px)); }
+}
+@media (min-width: 881px) and (max-width: 1180px) {
+  .drawer { position: fixed; z-index: 22; right: 0; top: calc(var(--top-h) + env(safe-area-inset-top, 0px)); bottom: calc(var(--bar) + env(safe-area-inset-bottom, 0px));
+    width: min(var(--drawer), 92vw); border-left: 1px solid var(--ink); box-shadow: -10px 0 28px rgba(20, 30, 26, .18); }
+  .dr-scroll { padding-right: max(22px, env(safe-area-inset-right, 0px)); }
+}
+@media (max-width: 880px) {
+  .drawer { position: fixed; z-index: 22; left: 0; right: 0; bottom: calc(var(--bar) + env(safe-area-inset-bottom, 0px)); max-height: 72vh; height: 72vh;
+    border-top: 1px solid var(--ink); box-shadow: 0 -10px 28px rgba(20, 30, 26, .2); }
+  .dr-grip { display: none; }
+  .dr-lab { display: none; } .dr-mini { display: block; }
+  .dr-scroll { padding: 0 max(16px, env(safe-area-inset-right, 0px)) 30px max(16px, env(safe-area-inset-left, 0px)); }
+}
 @media (max-width: 880px) {
   .frame { grid-template-columns: minmax(0, 1fr); }
   .rail { border-right: 0; border-bottom: 1px solid var(--rule); padding: 14px max(16px, env(safe-area-inset-right, 0px)) 18px max(16px, env(safe-area-inset-left, 0px)); }
@@ -355,6 +409,7 @@ mark { background: var(--mark); color: inherit; box-shadow: inset 0 -1px 0 var(-
     <section id="v-statistics" hidden></section>
     <section id="v-about" hidden></section>
   </main>
+  <aside class="drawer" id="drawer" aria-label="Decision details"><div class="dr-grip" id="drgrip" title="Drag to resize"></div><div class="dr-scroll" id="drawer-sc"><div id="drawer-in"></div></div></aside>
 </div>
 
 <div class="statusbar"><div class="sb-in gutter">
@@ -402,6 +457,7 @@ function loadShards() {
       bar.style.width = (100 * loaded / INFO.shards.length) + '%';
       if (loaded === INFO.shards.length) { allLoaded = true; $('#loadbar').hidden = true; }
       setLive();
+      if (DR.loading && PARAS[DOCS[DR.d].s] !== undefined) renderDrawer(true);
       if (allLoaded) { route(); if (S.pendingCheck && location.hash === '#check') { S.pendingCheck = false; runCheck(); } }
       else if (S.q) run(false);
     }).catch(() => { $('#sb-live').textContent = 'Paragraphs did not load - reload the page'; });
@@ -585,17 +641,17 @@ function findHTML(d) {
 const numLabel = row => row[1] != null ? `<span class="pmark" aria-hidden="true">¶</span><span class="pnum">${row[1]}</span>` : `<span class="pnum small">p.&nbsp;${row[2]}</span>`;
 function hitHTML(h, k, P) {
   const row = PARAS[h.i], d = h.d, head = HEADS[row[3]];
-  return `<article class="hit"><div class="lcol"><span class="no">№ ${String(k).padStart(2, '0')}</span>${numLabel(row)}</div>
-    <div><div class="head"><a class="ctitle" href="#doc-${esc(d.id)}" data-open="${d.i}" data-at="${h.i}">${esc(d.name)}</a><span class="meta">${esc(d.t)} · ${esc(d.b)}${d.mt ? ' · <span style="color:var(--ochre)">machine translation</span>' : ''}</span><span class="date">${dshort(d)}</span></div>
+  return `<article class="hit" data-di="${d.i}" data-at="${h.i}"><div class="lcol"><span class="no">№ ${String(k).padStart(2, '0')}</span>${numLabel(row)}</div>
+    <div><div class="head"><a class="ctitle" href="#doc-${esc(d.id)}" data-drawer="${d.i}" data-at="${h.i}">${esc(d.name)}</a><span class="meta">${esc(d.t)} · ${esc(d.b)}${d.mt ? ' · <span style="color:var(--ochre)">machine translation</span>' : ''}</span><span class="date">${dshort(d)}</span></div>
     <p class="ptext">${head ? `<span class="hd">${esc(head)}</span>` : ''}<span data-full="${h.i}">${hl(row[4], P, 720)}</span></p>
     <div class="acts">${row[4].length > 720 ? `<button class="ab" data-expand="${h.i}" type="button">Full paragraph</button>` : ''}<button class="ab" data-open="${d.i}" data-at="${h.i}" type="button">Open decision</button><a class="ab" href="${esc(pdfUrl(d, row[2]))}" target="_blank" rel="noopener">PDF p.&nbsp;${row[2]} ↗</a><button class="ab" data-cite="${d.i}" data-row="${h.i}" type="button">Copy citation</button></div></div></article>`;
 }
 function caseHTML(g, k, P) {
   const d = g.d, shown = g.hits.slice(0, 3);
-  const minis = shown.map(h => { const row = PARAS[h.i]; return `<div class="mini"><a href="#doc-${esc(d.id)}" data-open="${d.i}" data-at="${h.i}">${row[1] != null ? '¶ ' + row[1] : 'p. ' + row[2]}</a>${hl(row[4], P, 300)}</div>`; }).join('');
+  const minis = shown.map(h => { const row = PARAS[h.i]; return `<div class="mini"><a href="#doc-${esc(d.id)}" data-drawer="${d.i}" data-at="${h.i}">${row[1] != null ? '¶ ' + row[1] : 'p. ' + row[2]}</a>${hl(row[4], P, 300)}</div>`; }).join('');
   const parent = d.dec && BY_ID[d.dec] ? `<p class="sub">Opinion on: <a href="#doc-${esc(d.dec)}" data-open="${BY_ID[d.dec].i}">${esc(BY_ID[d.dec].t)}</a></p>` : '';
-  return `<article class="case"><div class="lcol"><span class="no">№ ${String(k).padStart(2, '0')}</span><span class="bodytag">${d.b === 'Court' ? 'COURT' : 'COMM.'}</span></div>
-    <div><div class="head"><a class="ctitle" href="#doc-${esc(d.id)}" data-open="${d.i}">${esc(d.name)}</a><span class="date">${dshort(d)}</span></div>
+  return `<article class="case" data-di="${d.i}" data-at="${g.hits[0] ? g.hits[0].i : ''}"><div class="lcol"><span class="no">№ ${String(k).padStart(2, '0')}</span><span class="bodytag">${d.b === 'Court' ? 'COURT' : 'COMM.'}</span></div>
+    <div><div class="head"><a class="ctitle" href="#doc-${esc(d.id)}" data-drawer="${d.i}" data-at="${g.hits[0] ? g.hits[0].i : ''}">${esc(d.name)}</a><span class="date">${dshort(d)}</span></div>
     <p class="sub">${esc(d.t)} · ${esc(d.num)}${d.st.length ? ' · ' + esc(d.st.join(', ')) : ''}${d.mt ? ' · <span class="mtbadge">Machine translation · unofficial</span>' : d.lang === 'fr' ? ' · in French' : ''}</p>${parent}
     ${findHTML(d)}${minis ? `<div class="minis">${minis}</div>` : ''}
     <div class="acts">${g.hits.length > 3 ? `<button class="ab" data-open="${d.i}" data-at="${g.hits[0].i}" type="button">All ${g.hits.length} paragraphs</button>` : `<button class="ab" data-open="${d.i}" ${g.hits[0] ? `data-at="${g.hits[0].i}"` : ''} type="button">Open decision</button>`}<a class="ab" href="${esc(d.url)}" target="_blank" rel="noopener">PDF ↗</a><button class="ab" data-cite="${d.i}" type="button">Copy citation</button></div></div></article>`;
@@ -627,6 +683,7 @@ function render() {
   if (r.mode === 'docs' && !total) html = `<div class="empty"><p>No document passes these filters. Reset the filters or remove an operator.</p></div>`;
   el.innerHTML = html;
   $('#morebtn').hidden = total <= N;
+  if (DR.d != null) { markActive(); renderDrawer(false); }
 }
 const anyFilter = R => R.mt || !R.court || !R.comm || !R.dec || !R.op || R.art || R.fm !== 'any' || R.state || R.y1 || R.y2 || !R.allTypes || !R.en || !R.fr;
 
@@ -676,6 +733,93 @@ function evLink(d, c) {
   for (let i = d.s; i < d.s + d.c; i++) if (PARAS[i] && PARAS[i][1] === n) return ` · <a href="#pr-${i}" data-jump="${i}">¶ ${n}</a>`;
   return ` · ¶ ${n}`;
 }
+
+/* ---------- drawer: a decision beside the results ---------- */
+const DR = {d: null, at: null, before: 1, after: 1, z: 1};
+const DZ = [0.85, 0.92, 1, 1.1, 1.2, 1.35];
+try { const z = +localStorage.getItem('bar-dz'); if (DZ.includes(z)) DR.z = z; } catch (_) { /* storage blocked */ }
+function openDrawer(di, at) {
+  DR.d = di; DR.at = at; DR.before = 1; DR.after = 1;
+  document.body.classList.add('dr-open');
+  markActive(); renderDrawer(true);
+}
+function closeDrawer() { document.body.classList.remove('dr-open'); DR.d = null; markActive(); }
+function markActive() {
+  $$('#results .active').forEach(x => x.classList.remove('active'));
+  if (DR.d == null) return;
+  const cards = $$(`#results [data-di="${DR.d}"]`);
+  const exact = cards.find(c => DR.at != null && c.dataset.at !== '' && +c.dataset.at === DR.at);
+  (exact ? [exact] : cards.slice(0, 1)).forEach(c => c.classList.add('active'));
+}
+function drRow(d, i, on, P) {
+  const row = PARAS[i];
+  return `<div class="dr-p${on ? ' on' : ''}"><div class="dr-n">${row[1] != null ? '¶&nbsp;' + row[1] : 'p.&nbsp;' + row[2]}</div><div><p>${hl(row[4], P)}</p>
+    <div class="dr-acts"><button class="ab" data-cite="${d.i}" data-row="${i}" type="button">Copy citation</button><a class="ab" href="${esc(pdfUrl(d, row[2]))}" target="_blank" rel="noopener">PDF p.&nbsp;${row[2]} ↗</a></div></div></div>`;
+}
+function renderDrawer(center) {
+  if (DR.d == null) return;
+  const d = DOCS[DR.d], P = S.res ? S.res.P : null;
+  const at = DR.at != null ? DR.at : d.op >= 0 ? d.s + d.op : d.s;
+  const facts = [d.b === 'Court' ? 'African Court' : 'African Commission', d.t, d.num, d.d ? dtext(d) : d.y, d.st.join(', ')].filter(Boolean).map(esc).join(' · ');
+  const alOnly = (d.al || []).filter(c => !d.v.includes(c) && !d.nv.includes(c));
+  let ctx;
+  DR.loading = false;
+  if (!d.c) ctx = '<p class="note">No paragraphs for this document.</p>';
+  else if (PARAS[d.s] === undefined) { ctx = '<p class="note">Loading paragraphs…</p>'; DR.loading = true; }
+  else {
+    const from = Math.max(d.s, at - DR.before), to = Math.min(d.s + d.c - 1, at + DR.after);
+    let rows = '', lastHead = null;
+    for (let i = from; i <= to; i++) {
+      const h = PARAS[i][3];
+      if (h !== lastHead) { if (h) rows += `<div class="dr-h">${esc(HEADS[h])}</div>`; lastHead = h; }
+      rows += drRow(d, i, i === at, P);
+    }
+    const before = from - d.s, after = d.s + d.c - 1 - to;
+    ctx = `<div class="dr-ctx">${DR.at == null ? `<p class="dr-why label">${d.op >= 0 ? 'Start of the operative part' : d.kind === 'opinion' ? 'Start of the opinion' : 'Start of the decision'}</p>` : ''}`
+      + (before ? `<button class="dr-more" data-dr="before" type="button">↑ Show ${Math.min(5, before)} earlier · ${before} before</button>` : '')
+      + rows + (after ? `<button class="dr-more" data-dr="after" type="button">↓ Show ${Math.min(5, after)} later · ${after} after</button>` : '') + '</div>';
+  }
+  $('#drawer-in').innerHTML = `<div class="dr-z" style="--dz:${DR.z}">
+    <div class="dr-top"><span class="label dr-lab">Decision details</span><span class="dr-mini">${esc(d.name)}</span><span class="dr-tools">
+      <button class="dr-btn" data-dr="zout" type="button" title="Smaller text" aria-label="Smaller text">A−</button><button class="dr-btn" data-dr="zin" type="button" title="Larger text" aria-label="Larger text">A+</button>
+      <button class="dr-btn" data-dr="close" type="button" title="Close (Esc)" aria-label="Close decision details">×</button></span></div>
+    <h2 class="dr-title">${esc(d.name)}</h2>
+    <p class="dr-sub">${facts}${d.mt ? ' · <span class="mtbadge">Machine translation · unofficial</span>' : d.lang === 'fr' ? ' · in French' : ''}</p>
+    ${findHTML(d)}${alOnly.length ? `<div class="pills">${alOnly.map(c => `<span class="pill a">alleged, not decided · ${esc(c.replace(/^Charter /, 'Art. '))}</span>`).join('')}</div>` : ''}
+    <div class="acts dr-links"><button class="ab" data-open="${d.i}" data-at="${at}" type="button">Open decision</button><a class="ab" href="${esc(d.url)}" target="_blank" rel="noopener">PDF ↗</a><button class="ab" data-cite="${d.i}" type="button">Copy citation</button></div>
+    ${ctx}</div>`;
+  if (center) requestAnimationFrame(() => {
+    const sc = $('#drawer-sc'), on = sc.querySelector('.dr-p.on'); if (!on) { sc.scrollTop = 0; return; }
+    const top = on.getBoundingClientRect().top - sc.getBoundingClientRect().top + sc.scrollTop;
+    // from the top when the title and the paragraph fit together; otherwise the paragraph just below the sticky bar
+    sc.scrollTop = top + Math.min(on.offsetHeight, 240) <= sc.clientHeight ? 0 : Math.max(0, top - 110);
+  });
+}
+function drawerAction(a) {
+  const sc = $('#drawer-sc');
+  if (a === 'close') { closeDrawer(); return; }
+  if (a === 'zin' || a === 'zout') {
+    DR.z = DZ[Math.max(0, Math.min(DZ.length - 1, DZ.indexOf(DR.z) + (a === 'zin' ? 1 : -1)))];
+    try { localStorage.setItem('bar-dz', DR.z); } catch (_) { /* storage blocked */ }
+    sc.querySelector('.dr-z').style.setProperty('--dz', DR.z); return;
+  }
+  const on = sc.querySelector('.dr-p.on'), y0 = on ? on.getBoundingClientRect().top : 0;
+  if (a === 'before') DR.before += 5; else DR.after += 5;
+  renderDrawer(false);
+  const on2 = sc.querySelector('.dr-p.on'); if (on && on2) sc.scrollTop += on2.getBoundingClientRect().top - y0;
+}
+(() => {
+  const g = $('#drgrip'), root = document.documentElement; let drag = false;
+  const clamp = px => Math.max(300, Math.min(Math.round(innerWidth * 0.5), Math.round(px)));
+  try { const w = +localStorage.getItem('bar-drw'); if (w) root.style.setProperty('--drawer', clamp(w) + 'px'); } catch (_) { /* storage blocked */ }
+  g.addEventListener('pointerdown', ev => { ev.preventDefault(); drag = true; g.setPointerCapture(ev.pointerId); document.body.classList.add('dr-resizing'); });
+  g.addEventListener('pointermove', ev => { if (drag) root.style.setProperty('--drawer', clamp(innerWidth - ev.clientX) + 'px'); });
+  const end = () => { if (!drag) return; drag = false; document.body.classList.remove('dr-resizing'); try { localStorage.setItem('bar-drw', parseInt(getComputedStyle(root).getPropertyValue('--drawer'), 10)); } catch (_) { /* storage blocked */ } };
+  g.addEventListener('pointerup', end); g.addEventListener('pointercancel', end);
+  const topH = () => root.style.setProperty('--top-h', $('.top').offsetHeight + 'px');
+  topH(); addEventListener('resize', topH);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.body.classList.contains('dr-open')) closeDrawer(); });
+})();
 
 /* ---------- statistics ---------- */
 function stats() {
@@ -959,6 +1103,7 @@ See also Avocats Sans Frontières v Burundi, Communication 245/02, and Kenyan Ci
 /* ---------- views and routing ---------- */
 function showView(name) {
   ['search', 'doc', 'check', 'statistics', 'about'].forEach(n => { $('#v-' + n).hidden = n !== name; });
+  document.body.classList.toggle('in-search', name === 'search');
   $$('nav.views a').forEach(a => a.toggleAttribute('aria-current', false));
   const nav = name === 'doc' ? 'search' : name; const a = $(`nav.views a[data-v="${nav}"]`); if (a) a.setAttribute('aria-current', 'page');
   $('#band').hidden = name === 'statistics' || name === 'about' || name === 'check';
@@ -978,6 +1123,17 @@ window.addEventListener('hashchange', route);
 
 /* ---------- events ---------- */
 document.addEventListener('click', e => {
+  const dw = e.target.closest('[data-drawer]');
+  if (dw) {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // a new tab gets the whole decision
+    e.preventDefault(); openDrawer(+dw.dataset.drawer, dw.dataset.at !== '' && dw.dataset.at != null ? +dw.dataset.at : null); return;
+  }
+  const da = e.target.closest('[data-dr]');
+  if (da) { drawerAction(da.dataset.dr); return; }
+  const card = e.target.closest('#results .hit, #results .case');
+  if (card && !e.target.closest('a, button') && !String(window.getSelection ? window.getSelection() : '').trim()) {
+    openDrawer(+card.dataset.di, card.dataset.at !== '' ? +card.dataset.at : null); return;
+  }
   const o = e.target.closest('[data-open]');
   if (o) {
     e.preventDefault();
