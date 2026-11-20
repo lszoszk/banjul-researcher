@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+title: "Banjul Researcher — paragraph-level search over the African Commission and Court"
+message: >-
+  Cite this software using the metadata below. Legal propositions and quoted
+  paragraphs should additionally cite the decision itself.
+type: software
+authors:
+  - family-names: "Szoszkiewicz"
+    given-names: "Łukasz"
+    email: "l.szoszkiewicz@amu.edu.pl"
+    affiliation: "Adam Mickiewicz University, Poznań"
+    orcid: "https://orcid.org/0000-0001-6671-2893"
+abstract: >-
+  Banjul Researcher is a search engine over the decisions of the African
+  Commission on Human and Peoples' Rights and the judgments, rulings, orders
+  and separate opinions of the African Court on Human and Peoples' Rights,
+  at the level of the numbered paragraph. It adds findings of violation
+  extracted from the operative parts, a citation check, and unofficial
+  English machine translations of decisions published only in French.
+keywords:
+  - "African Commission on Human and Peoples' Rights"
+  - "African Court on Human and Peoples' Rights"
+  - "African Charter on Human and Peoples' Rights"
+  - "case law"
+  - "human rights"
+  - "legal information retrieval"
+license: "PolyForm-Noncommercial-1.0.0"
+repository-code: "https://github.com/lszoszk/banjul-researcher"
+url: "https://lszoszk.github.io/banjul-researcher/"
+version: "1.0.0"
+date-released: "2026-11-20"

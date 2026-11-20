@@ -1,0 +1,33 @@
+Banjul Researcher — attribution and licensing notice
+====================================================
+
+This project contains three distinct components, each under its own terms:
+
+  Software          PolyForm Noncommercial License 1.0.0
+                    See:  LICENSE
+                    Covers:  the website (index.html) and the scripts
+                             that build it.
+                    Copyright © 2026 Łukasz Szoszkiewicz.
+
+  Curated dataset   Creative Commons Attribution-NonCommercial-ShareAlike
+                    4.0 International (CC BY-NC-SA 4.0)
+                    See:  LICENSE-DATA
+                    Covers:  the paragraph text and numbering, metadata,
+                             extracted findings of violation and the
+                             unofficial machine translations (docs.json,
+                             p*.json).
+                    Copyright © 2026 Łukasz Szoszkiewicz.
+
+  Source materials  Decisions of the African Commission on Human and
+                    Peoples' Rights, from its library at
+                    https://achpr-library.uwazi.io, and judgments, rulings,
+                    orders and separate opinions of the African Court on
+                    Human and Peoples' Rights, from AJUDATA at
+                    https://ajudata.african-court.org. They are the work of
+                    these bodies, reproduced for research; this project does
+                    not grant rights in them. The PDF at each source is the
+                    authoritative version.
+
+This project is not affiliated with or endorsed by the African Commission on
+Human and Peoples' Rights or the African Court on Human and Peoples' Rights.
+It is a research aid, not legal advice.
