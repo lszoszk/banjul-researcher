@@ -12,6 +12,10 @@ Corpus built on 2026-11-20: 1,041 documents and 72,635 paragraphs, plus 47 unoff
 - **Check** finds the citations of the Commission and the Court in a pasted text (communication and application numbers, "X v State", "cited above") and checks that the number exists and matches the name, that the pinpointed paragraph exists, and that a quotation matches the decision word for word. The text stays in the browser.
 - **Statistics** of decisions by year, respondent State and article found violated.
 
+## Use with your AI assistant
+
+The MCP server [mcp-banjul](https://github.com/lszoszk/mcp-banjul) offers the same search and citation check to Claude, ChatGPT and other assistants that support the Model Context Protocol. Connector address: `https://150.254.115.204/banjul-mcp/mcp` (Claude Code: `claude mcp add --transport http banjul https://150.254.115.204/banjul-mcp/mcp --scope user`).
+
 ## How the corpus was prepared
 
 - Sources: the Commission's library at https://achpr-library.uwazi.io and the Court's AJUDATA at https://ajudata.african-court.org (English versions of the Court's documents). Identical files listed twice are kept once.
