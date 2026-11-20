@@ -675,10 +675,10 @@ function render() {
   if (r.mode === 'docs') {
     total = r.docs.length;
     $('#r-eyebrow').textContent = 'Results · decision-level';
-    $('#r-head').textContent = S.q || anyFilter(r.R) ? `${total.toLocaleString('en')} documents match` : `${total.toLocaleString('en')} documents in the corpus`;
+    $('#r-head').textContent = S.q || anyFilter(r.R) ? `${total.toLocaleString('en')} ${total === 1 ? 'document matches' : 'documents match'}` : `${total.toLocaleString('en')} documents in the corpus`;
     $('#r-sub').textContent = `${S.q || anyFilter(r.R) ? 'Filtered by the rail and operators' : 'Every document in the corpus'} · ${sortName}${r.note ? ' · ' + r.note : ''}. Type words to search the paragraphs.`;
     html = r.docs.slice(0, N).map((g, k) => caseHTML(g, k + 1, r.P)).join('');
-    $('#qcount').innerHTML = `<b>${total.toLocaleString('en')}</b> documents`;
+    $('#qcount').innerHTML = `<b>${total.toLocaleString('en')}</b> document${total === 1 ? '' : 's'}`;
   } else {
     const groups = S.group === 'case';
     total = groups ? r.groups.length : r.hits.length;
