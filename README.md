@@ -4,7 +4,7 @@
 
 A search engine over the decisions of the African Commission on Human and Peoples' Rights (Banjul) and the judgments, rulings, orders and separate opinions of the African Court on Human and Peoples' Rights (Arusha), and the Commission's general comments and principles and guidelines, at the level of the numbered paragraph. The name comes from the Banjul Charter, as the African Charter on Human and Peoples' Rights is often called.
 
-Corpus built on 2026-11-27: 1,079 documents (23 of them general comments and guidelines) and 71,758 paragraphs, plus 47 unofficial English machine translations of Commission decisions published only in French.
+Corpus built on 2026-11-27: 1,079 documents (23 of them general comments and guidelines) and 71,758 paragraphs, plus 50 unofficial English machine translations of Commission decisions published only in French.
 
 ## What it does
 
