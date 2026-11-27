@@ -2,9 +2,9 @@
 
 **Live:** https://lszoszk.github.io/banjul-researcher/
 
-A search engine over the decisions of the African Commission on Human and Peoples' Rights (Banjul) and the judgments, rulings, orders and separate opinions of the African Court on Human and Peoples' Rights (Arusha), the Commission's general comments, principles and guidelines and concluding observations on State reports, and the decisions and general comments of the African Committee of Experts on the Rights and Welfare of the Child (ACERWC), at the level of the numbered paragraph. The name comes from the Banjul Charter, as the African Charter on Human and Peoples' Rights is often called.
+A search engine over the decisions of the African Commission on Human and Peoples' Rights (Banjul) and the judgments, rulings, orders and separate opinions of the African Court on Human and Peoples' Rights (Arusha), the Commission's general comments, principles and guidelines, concluding observations on State reports and resolutions, and the decisions and general comments of the African Committee of Experts on the Rights and Welfare of the Child (ACERWC), at the level of the numbered paragraph. The name comes from the Banjul Charter, as the African Charter on Human and Peoples' Rights is often called.
 
-Corpus built on 2026-11-27: 1,181 documents (32 of them general comments and guidelines, 42 concluding observations) and 78,722 paragraphs, plus 57 unofficial English machine translations of documents published only in French (decisions and concluding observations of the Commission, decisions of the ACERWC).
+Corpus built on 2026-11-27: 1,760 documents (32 of them general comments and guidelines, 42 concluding observations, 579 resolutions) and 89,007 paragraphs, plus 57 unofficial English machine translations of documents published only in French (decisions and concluding observations of the Commission, decisions of the ACERWC).
 
 ## What it does
 
